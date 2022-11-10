@@ -37,7 +37,7 @@ function searchBooks(searchTerm){
     const filterdList = []
     for(let i = 0; i < bookList.length; i++){
         const title = bookList[i].title.toLowerCase();
-        if(title.indexOf(searchTerm) >= 0){
+        if(title.indexOf(searchTerm) >= 0){ 
             console.log('match?');
             filterdList.push(bookList[0])
         }
