@@ -39,7 +39,7 @@ function searchBooks(searchTerm){
         const title = bookList[i].title.toLowerCase();
         if(title.indexOf(searchTerm) >= 0){ 
             console.log('match?');
-            filterdList.push(bookList[0])
+            filterdList.push(bookList[i])
         }
     }
     renderBookList(filterdList);
