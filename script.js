@@ -1,17 +1,10 @@
 'use strict';
 /*61 rader*/
-const bookList = [
-    {
-        id: 1, 
-        author: 'Charles Dickens', 
-        title: 'Oliver Twist'
-    },
-    {
-        id: 2, 
-        author: 'William Shakespear',
-        title: 'Hamlet'
-    }
-];
+let bookList = [];
+
+window.addEventListener("load", () => {
+    getAll().then(apiBooks => (bookList = apiBooks));
+})
 
 searchField.addEventListener("keyup", (e) => searchBooks(e.target.value));
 
@@ -24,14 +17,15 @@ searchField.addEventListener("keyup", (e) => searchBooks(e.target.value));
 ); */
 
 
-function searchBooks(searchTerm){
-
-    const filterdList = bookList.filter( 
-        ({title, author}) => 
+async function searchBooks(searchTerm){
+    const bookList = await getAll();
+    renderBookList(
+        bookList.filter(
+            ({title, author}) =>
             title.toLowerCase().indexOf(searchTerm.toLowerCase()) >= 0 ||
-            author.toLowerCase().indexOf(searchTerm.toLowerCase()) >= 0);
-
-    renderBookList(filterdList);
+            author.toLowerCase().indexOf(searchTerm.toLowerCase()) >= 0
+        )
+    );
 }
 
 function renderBookList(bookList){
@@ -45,8 +39,10 @@ function renderBookList(bookList){
     if(existingElement){
         root.removeChild(existingElement);
     }
-    if(bookList.length > 0){
+    if(bookList.length > 0 && searchField.value){
         root.insertAdjacentHTML("beforeend", BookList(bookList));
     }
     
 }
+
+getAll().then();
