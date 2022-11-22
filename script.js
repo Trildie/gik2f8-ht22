@@ -1,9 +1,5 @@
 'use strict';
-/*Vad ska vi göra här? Specielt när GIT är så brutalt dåligt! FUCK GIT FUCK GITHUB det borde kallas GITSSCRUB!          */
-
-
-
-
+/*61 rader*/
 const bookList = [
     {
         id: 1, 
@@ -17,38 +13,25 @@ const bookList = [
     }
 ];
 
+searchField.addEventListener("keyup", (e) => searchBooks(e.target.value));
 
-/*const searchInput = document.children[0].children[1].children[1].children[1];*/
-/*const searchField = document.getElementById('searchField');*/
+/* searchField.addEventListener("keyup", (e) => renderBookList(
+        bookList.filter(({title, author}) => {
+            const searchTerm = e.target.value.toLowerCase();
+            return title.toLowerCase().indexOf(searchTerm) >= 0 || author.toLowerCase().indexOf(searchTerm) >= 0;
+        })
+    )
+); */
 
-
-searchField.addEventListener("keyup", handleKeyPress);
-
-function handleKeyPress (e){
-    /*Ta emot/läsa av värdet i inputfältet.
-    Skicka värdet till searchBooks.
-    searchBooks retunerar en filtrerad lista
-    Filtrerade listan skickas till renderBookList
-    */
-    searchBooks(e.target.value);
-}
 
 function searchBooks(searchTerm){
-/*  Loopa igenom bookList  
-    För varje varv i loopen, ta det aktuella elementet (boken)
-    Jämnför titeln med söktermen.
-    Om söktermen finns någonstans i titeln, lägg till elementet i ny lista(filterdList)
-    Retunerar filterdList eller anropar renderBookList?
-*/
-    const filterdList = []
-    for(let i = 0; i < bookList.length; i++){
-        const title = bookList[i].title.toLowerCase();
-        if(title.indexOf(searchTerm) >= 0){ 
-            filterdList.push(bookList[i])
-        }
-    }
-    renderBookList(filterdList);
 
+    const filterdList = bookList.filter( 
+        ({title, author}) => 
+            title.toLowerCase().indexOf(searchTerm.toLowerCase()) >= 0 ||
+            author.toLowerCase().indexOf(searchTerm.toLowerCase()) >= 0);
+
+    renderBookList(filterdList);
 }
 
 function renderBookList(bookList){
